@@ -1,0 +1,37 @@
+{% extends 'base_boards.html' %}
+{% load staticfiles %}
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <h1>Profile</h1>
+        <p>Username: {{ user }}</p>
+        <p>First name: {{ user.first_name }}</p>
+        <p>Last name: {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <!--
+    {% if user.userprofile.image %}
+    <img src="{{ user.userprofile.image.url }}" width="240">
+    {% endif %}
+
+    -->
+
+
+        <form action="{% url 'user_update' user.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-edit"> Edit</span>
+            </button>
+        </form>
+
+    </div>
+
+
+{% endblock %}
+</body>
+</html>

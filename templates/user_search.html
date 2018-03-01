@@ -1,0 +1,23 @@
+{% extends 'base_boards.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="row">
+        {% for user in users %}
+            <div class="col-sm-4 col-lg-2">
+            <div class="thumbnail">
+
+            <div class="caption">
+                {{ user.username }}<br>
+                {{ user.last_name }}<br>
+                {{ user.email }}<br>
+                <a href="/{{ user.id }}" class="btn btn-primary btn-sm" role="button">View Details</a>
+               </div></div> {% if forloop.counter|divisibleby:6 %}
+                    </div></div> <br><br>
+                    <div class="row">
+                {% endif %}
+
+            </div>
+        {% endfor %}
+        </div>
+
+ {% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Sfs{% endblock %}</title>
+    {% load staticfiles %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+
+        <!-- Header -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'index' %}">Sfs Book</a>
+        </div>
+
+        <!-- Items -->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'index' %}"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;
+                    Books</a></li>
+
+            </ul>
+            <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'book_search' %}">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                </div>
+                <button type="submit" class="btn btn-primary btn-md active">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="{% url 'ajouter' %}">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add Books
+                    </a>
+                </li>
+                <li class="dropdown">
+
+                    {% if user.is_authenticated %}
+
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{% url 'profile' %}">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;
+                            Profile {{ user.username }}
+
+                        </a>
+                    {% endif %}
+                </li>
+                <form class="navbar-form navbar-left " role="search" method="get" action="{% url 'user_search' %}">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="u" value="{{ request.GET.u }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-ms active">Search User</button>
+                </form>
+                <div class="btn-group btn-group-sm">
+                    <li>
+                        <a href="{% url 'user_list' %}">
+                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span>&nbsp; list users
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'user_add' %}">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp; Add users
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'logout' %}">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+                        </a>
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+{% block content %}
+{% endblock %}
+</body>
+</html>

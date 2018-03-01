@@ -1,0 +1,29 @@
+{% extends 'base_boards.html' %}
+{% load staticfiles %}
+{% block content %}
+    <div class="row">
+        {% for user in users %}
+            <div class="col-sm-4 col-lg-2">
+                <div class="thumbnail">
+
+                    <div class="caption">
+                        {{ user.username }}<br>
+                        {{ user.last_name }}<br>
+                        {{ user.email }}<br>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{% url 'user_detail' user.id %}" class="btn btn-primary btn-sm" role="button">View
+                                Details</a>
+                            <a href="{% url 'user_delete' user.id %}" class="btn btn-danger btn-sm"
+                               role="button">Delete</a>
+                        </div>
+                    </div>
+                </div> {% if forloop.counter|divisibleby:6 %}
+                </div></div> <br><br>
+                <div class="row">
+            {% endif %}
+
+                </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
